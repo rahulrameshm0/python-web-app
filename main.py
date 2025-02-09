@@ -2,11 +2,11 @@ from flask import Flask, render_template, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm,  LoginForm
 from datetime import datetime
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "0000"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
