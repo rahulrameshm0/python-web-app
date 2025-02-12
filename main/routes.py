@@ -1,4 +1,5 @@
 import secrets
+from PIL import Image
 import os
 from flask import render_template, flash, redirect, url_for, request
 from main import app, db, bcrypt
@@ -69,8 +70,14 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     pricture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, "static/profile",pricture_fn)
-    form_picture.save(picture_path)
+
+    output_size = (125,125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
     return pricture_fn
+
 
 @app.route("/account", methods=["GET", "POST"])
 @login_required
